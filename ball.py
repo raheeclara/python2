@@ -16,7 +16,7 @@ class Ball:
         self.court = court
         self.canvas = court.canvas
 
-    self.ball = self.canvas.create_oval(x1,y1,x2,y2,fill = "yellow")
+        self.ball = self.canvas.create_oval(x1,y1,x2,y2,fill = "yellow")
 
     def move_ball(self):
         self.x1 += self.x_dist
