@@ -1,9 +1,25 @@
-from calculator import *
+from tkinter import *
+from court import *
+from ball import *
 
-x = int(input("x : "))
-y = int(input("y : "))
+width, height = 745,374
 
-add(x, y)
-sub(x, y)
-mul(x, y)
-div(x, y)
+win = Tk()
+win.title("Tennis Game")
+win.geometry("745x347+150+150")
+win.resizable(False,False)
+
+court = Court(win,width,height,"court.png")
+
+x1,y1 = width / 2, height / 2
+x2,y2 = x1 + 30, y1 + 30
+
+ball = Ball(court,x1,y1,x2,y2)
+
+def play_game():
+    ball.move_ball()
+    win.after(50, play_game)
+
+play_game()
+
+win.mainloop()
