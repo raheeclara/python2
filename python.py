@@ -1,23 +1,23 @@
-from tkinter import *
-pen_color = "black"
-def paint(event):
-    global pen_color
-    x1,y1 = event.x,event.y
-    x2,y2 = x1 + 5, y1 + 5
-    canvas.create_line(x1,y1,x2,y2,width = 3,fill = pen_color)
-def change_color():
-    global pen_color
-    pen_color = "red"
-def change_color1():
-    global pen_color
-    pen_color = "black"
-win = Tk()
-canvas = Canvas(win, bg = "white",width = 500,height = 200)
-btn = Button(win, text = "red",command = change_color)
-btn1 = Button(win, text = "black",command = change_color1)
-canvas.pack()
-btn.pack()
-btn1.pack()
-btn2.pack()
-win.bind("<B1-Motion>",paint)
-win.mainloop()
+import csv
+
+f =open("accident.csv",encoding = "cp949")
+data = csv.reader(f)
+
+next(data)
+i = 0
+road_type = []
+number = []
+
+for row in data :
+    row[2:] = map(int,row[2:])
+    if i< 49:
+        if i % 7 == 5:
+            road_type.append(row[0])
+            number.append(row[2])
+
+        i += 1
+
+for i in range(len(road_type)):
+    print(road_type[i],':',number[i])
+
+f.close()
