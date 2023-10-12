@@ -1,23 +1,22 @@
 import csv
+import numpy as np
+import matplotlib.pyplot as plt
 
-f =open("accident.csv",encoding = "cp949")
+f = open('class.csv')
 data = csv.reader(f)
 
-next(data)
-i = 0
-road_type = []
-number = []
+h = next(data)
+w = next(data)
+
+h = np.array(h[2:],dtype = int)
+w = np.array(w[2:],dtype = int)
 
 for row in data :
-    row[2:] = map(int,row[2:])
-    if i< 49:
-        if i % 7 == 5:
-            road_type.append(row[0])
-            number.append(row[2])
+    if '키' in row[1:] :
+        h = np.concatenate((h,np.array(row[2:],dtype = int)), axis = None)
+    if '몸무게' in row [1:]:
+        w = np.concatenate((w,np.array(row[2:],dtype = int)), axis = None)
 
-        i += 1
-
-for i in range(len(road_type)):
-    print(road_type[i],':',number[i])
-
-f.close()
+plt.scatter(h,w,c = w,cmap = 'jet')
+plt.colorbar()
+plt.show()
